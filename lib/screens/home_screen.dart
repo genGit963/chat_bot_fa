@@ -5,6 +5,7 @@ import 'package:chat_bot/pages/notifications_page.dart';
 import 'package:chat_bot/resources/random_img_gen.dart';
 import 'package:chat_bot/widgets/appbar_leading_icons.dart';
 import 'package:chat_bot/widgets/avatar.dart';
+import 'package:chat_bot/widgets/glowing_actn_btn.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:chat_bot/utils/theme.dart';
@@ -38,11 +39,11 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: Theme.of(context).iconTheme,
         backgroundColor: Colors.transparent,
         centerTitle: true,
         elevation: 0,
-        title: Text(pagesTitle[indices], style: const
-        TextStyle(fontWeight: FontWeight.bold, fontSize: 15),),
+        title: Text(pagesTitle[indices]),
         actions:[
           Padding(
             padding: const EdgeInsets.only(right: 6.0),
@@ -86,37 +87,47 @@ class _BottomNavBarState extends State<_BottomNavBar> {
     return SafeArea(
       top: false,
       bottom: true,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          _NavBarElements(
-            index: 0,
-            lable: 'Messages',
-            icon: CupertinoIcons.bubble_left_bubble_right_fill,
-            onTap: widget.onSelectedItem,
-          ),
+      child: Card(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            _NavBarElements(
+              index: 0,
+              lable: 'Messages',
+              icon: CupertinoIcons.bubble_left_bubble_right_fill,
+              onTap: widget.onSelectedItem,
+            ),
 
-          _NavBarElements(
-            index: 1,
-            lable: 'Notifications',
-            icon: CupertinoIcons.bell_fill,
-            onTap: widget.onSelectedItem,
-          ),
+            _NavBarElements(
+              index: 1,
+              lable: 'Notifications',
+              icon: CupertinoIcons.bell_fill,
+              onTap: widget.onSelectedItem,
+            ),
 
-          _NavBarElements(
-            index: 2,
-            lable: 'Calls',
-            icon: CupertinoIcons.phone_fill,
-            onTap: widget.onSelectedItem,
-          ),
+            // Glowing btn
+            GlowingActionButton(
+                color: Colors.blue,
+                icon: CupertinoIcons.add,
+                onPressed: (){
+                  debugPrint("Hey its.!!");
+                }),
 
-          _NavBarElements(
-            index: 3,
-            lable: 'Contacts',
-            icon: CupertinoIcons.person_2_fill,
-            onTap: widget.onSelectedItem,
-          ),
-        ],
+            _NavBarElements(
+              index: 2,
+              lable: 'Calls',
+              icon: CupertinoIcons.phone_fill,
+              onTap: widget.onSelectedItem,
+            ),
+
+            _NavBarElements(
+              index: 3,
+              lable: 'Contacts',
+              icon: CupertinoIcons.person_2_fill,
+              onTap: widget.onSelectedItem,
+            ),
+          ],
+        ),
       ),
         );
   }
@@ -149,6 +160,8 @@ class _NavBarElements extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
+          const SizedBox(height: 4,), // upper space
+
           //for element icon
           Icon(icon, size: 20,),
 

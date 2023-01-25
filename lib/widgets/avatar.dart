@@ -13,14 +13,14 @@ class Avatar extends StatelessWidget {
     Key? key,
     this.url,
     this.onTap,
-  })  : radius = 18,
+  })  : radius = 20,
         super(key: key);
 
   const Avatar.medium({
     Key? key,
     this.url,
     this.onTap,
-  })  : radius = 26,
+  })  : radius = 28,
         super(key: key);
 
   const Avatar.large({
@@ -44,10 +44,13 @@ class Avatar extends StatelessWidget {
 
   Widget _avatar(BuildContext context) {
     if (url != null) {
-      return CircleAvatar(
-        radius: radius,
-        backgroundImage: CachedNetworkImageProvider(url!),
-        backgroundColor: Theme.of(context).cardColor,
+      return Container(
+        padding: const EdgeInsets.all(6),
+        child: CircleAvatar(
+          radius: radius,
+          backgroundImage: CachedNetworkImageProvider(url!),
+          backgroundColor: Theme.of(context).cardColor,
+        ),
       );
     } else {
       return CircleAvatar(
